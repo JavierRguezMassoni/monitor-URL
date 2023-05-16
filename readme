@@ -1,0 +1,40 @@
+Para configurar la extensión mail para enviar correos desde Gmail, primero debes asegurarte de que tienes mailutils y msmtp instalados en tu sistema. Si no los tienes, puedes instalarlos con el siguiente comando:
+
+sudo apt-get install mailutils msmtp
+
+Luego, sigue los siguientes pasos para configurar la extensión mail:
+
+Crea un archivo de configuración para msmtp en el directorio ~/.msmtprc. Puedes hacer esto con el siguiente comando:
+    
+touch ~/.msmtprc
+
+Abre el archivo ~/.msmtprc con tu editor de texto favorito y añade las siguientes líneas:
+
+graphql
+defaults
+tls on
+tls_starttls on
+tls_trust_file /etc/ssl/certs/ca-certificates.crt
+
+account gmail
+host smtp.gmail.com
+port 587
+auth on
+user tu_direccion_de_correo@gmail.com
+password tu_contraseña_de_correo
+from tu_direccion_de_correo@gmail.com
+logfile ~/.msmtp.log
+
+Asegúrate de cambiar tu_direccion_de_correo@gmail.com y tu_contraseña_de_correo por tu dirección de correo electrónico y contraseña de Gmail. También puedes cambiar
+la ruta del archivo de registro si lo deseas.
+
+Cambia los permisos del archivo ~/.msmtprc para que sólo tú puedas leer y escribir en él:
+
+chmod 600 ~/.msmtprc
+
+Por último, puedes enviar un correo electrónico utilizando la extensión mail con el siguiente comando:
+
+    echo "Cuerpo del correo" | mail -s "Asunto del correo" destinatario@dominio.com
+
+Reemplaza Cuerpo del correo, Asunto del correo y destinatario@dominio.com con los detalles de tu correo electrónico.
+Con estos pasos, deberías poder enviar correos electrónicos desde la extensión mail utilizando tu cuenta de Gmail.
